@@ -1,0 +1,25 @@
+{
+    "name": "magento2/hiberus-test",
+    "type": "magento2-module",
+    "require": {
+        "php": "~5.5.0|~5.6.0|~7.0.0"
+    },
+    "description": "Students Management",
+    "keywords": ["relevant","tags","go","here"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Javier López Girela",
+            "email": "javi_lg2014@hotmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Hiberus\\Lopez\\": ""
+        }
+    }
+}
