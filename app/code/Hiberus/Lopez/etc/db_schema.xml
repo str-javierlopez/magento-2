@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="hiberus_exam" resource="default" engine="innodb" comment="Hiberus students exams">
+        <column xsi:type="int"     name="id_exam"   unsigned="false" nullable="false" identity="true" comment="Primary key ID Exam"/>
+        <column xsi:type="varchar" name="firstname" length="100"     nullable="false" comment="Firstname"/>
+        <column xsi:type="varchar" name="lastname"  length="250"     nullable="false" comment="Lastname"/>
+        <column xsi:type="decimal" name="mark"      precision="4"    scale="2"        unsigned="true"  nullable="false"  comment="Mark of exam"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id_exam"/>
+        </constraint>
+    </table>
+</schema>
