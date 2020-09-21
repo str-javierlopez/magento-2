@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Hiberus_Lopez::configurateModule" title="Hiberus Lopez" sortOrder="20">
+                    <resource id="Hiberus_Lopez::cron" title="Cron" sortOrder="10"/>
+                    <resource id="Hiberus_Lopez::configuration_general" title="Configuración" sortOrder="20" />
+                    <resource id="Hiberus_Lopez::import_students" title="Importar Notas de alumnos" sortOrder="30" />
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>
