@@ -1,8 +1,9 @@
 <?php
 
-
 namespace Hiberus\Lopez\Model\ResourceModel\HiberusExams;
 
+use Hiberus\Lopez\Model\HiberusExams;
+use Hiberus\Lopez\Model\ResourceModel\HiberusExams as ResourceModelHiberusExams;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
@@ -15,31 +16,30 @@ class Collection extends AbstractCollection
      */
     protected function _construct()
     {
-        $this->_init(\Magento\Wishlist\Model\Wishlist::class, \Magento\Wishlist\Model\ResourceModel\Wishlist::class);
+        $this->_init(HiberusExams::class, ResourceModelHiberusExams::class);
     }
 
     /**
-     * Filter collection by customer id
+     * Filter collection by id exam
      *
-     * @param int $customerId
+     * @param int $idExam
      * @return $this
      */
-    public function filterByCustomerId($customerId)
+    public function filterByIdExam($idExam)
     {
-        $this->addFieldToFilter('customer_id', $customerId);
+        $this->addFieldToFilter('id_exam', $idExam);
         return $this;
     }
 
     /**
-     * Filter collection by customer ids
+     * Filter collection by ids exams
      *
-     * @param array $customerIds
+     * @param array $idExams
      * @return $this
      */
-    public function filterByCustomerIds(array $customerIds)
+    public function filterIdExams(array $idExams) : self
     {
-        $this->addFieldToFilter('customer_id', ['in' => $customerIds]);
+        $this->addFieldToFilter('id_exam', ['in' => $idExams]);
         return $this;
     }
-
 }

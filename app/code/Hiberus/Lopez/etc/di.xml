@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Hiberus\Lopez\Api\Data\HiberusExamsInterface"             type="Hiberus\Lopez\Model\HiberusExams" />
+    <preference for="Hiberus\Lopez\Api\ExamManagementInterface"                type="Hiberus\Lopez\Model\ExamManagement" />
+    <preference for="Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Hiberus\Lopez\Api\Data\HiberusExamsParseCsvInterface"     type="Hiberus\Lopez\Model\HiberusExamsParseCsv" />
+    <preference for="Hiberus\Lopez\Api\HiberusExamsRepositoryInterface"        type="Hiberus\Lopez\Model\HiberusExamsRepository" />
+</config>

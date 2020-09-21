@@ -34,14 +34,6 @@ interface HiberusExamsRepositoryInterface
     public function getByIdExam($idExam);
 
     /**
-     * Retrieve exams by a criteria
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return HiberusExamsSearchResultInterface[]
-     * @throws LocalizedException
-     */
-    public function getList(SearchCriteriaInterface $searchCriteria);
-
-    /**
      * Delete Exam
      * @param HiberusExamsInterface $hiberusExam
      * @return bool
