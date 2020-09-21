@@ -99,35 +99,14 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
     }
 
     /**
-     * Get List of Hiberus Exams
-     * @param SearchCriteriaInterface $searchCriteria
-     * @return \Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface|\Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface[]
-     */
-    public function getList(SearchCriteriaInterface $searchCriteria)
-    {
-        $collection = $this->_hiberusExamsCollection->create();
-
-        $this->_collectionProcessor->process($searchCriteria, $collection);
-
-        $searchResults = $this->_searchResultFactory->create();
-
-        $searchResults->setItems($collection->getItems());
-
-        $searchResults->setTotalCount($collection->getSize());
-
-        return $searchResults;
-    }
-
-    /**
      * Delete Hiberus Exam
      * @param HiberusExamsInterface $hiberusExam
      * @return bool
      * @throws CouldNotDeleteException
      */
-    public function delete(HiberusExamsInterface $hiberusExam)
+    public function delete(HiberusExamsInterface $hiberusExam) : bool
     {
         try {
-            $idExam = $hiberusExam->getIdExam();
             $this->_resource->delete($hiberusExam);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(__($exception->getMessage()));
