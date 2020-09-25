@@ -26,7 +26,7 @@ class HiberusExams extends AbstractDb
     /**
      * Construct
      */
-    protected function _construct()
+    protected function _construct() : void
     {
         $this->_init($this->_table, $this->_primaryKeyField);
     }
@@ -39,7 +39,7 @@ class HiberusExams extends AbstractDb
      * @param AbstractModel $object
      * @return Select
      */
-    protected function _getLoadSelect($field, $value, $object)
+    protected function _getLoadSelect($field, $value, $object) : Select
     {
         $select = parent::_getLoadSelect($field, $value, $object);
         if ($field == $this->_primaryKeyField) {
@@ -53,7 +53,7 @@ class HiberusExams extends AbstractDb
      *
      * @return string
      */
-    public function getIdExamFieldName()
+    public function getIdExamFieldName() : string
     {
         return $this->_primaryKeyField;
     }
@@ -64,7 +64,7 @@ class HiberusExams extends AbstractDb
      * @param string $fieldName
      * @return $this
      */
-    public function setIdExamFieldName($fieldName)
+    public function setIdExamFieldName(string $fieldName) : self
     {
         $this->_primaryKeyField = $fieldName;
         return $this;
@@ -73,7 +73,7 @@ class HiberusExams extends AbstractDb
     /**
      * {@inheritdoc}
      */
-    public function save(AbstractModel $object)
+    public function save(AbstractModel $object) : self
     {
         $object->setHasDataChanges(true);
         return parent::save($object);

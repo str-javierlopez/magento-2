@@ -1,0 +1,57 @@
+
+<ul data-bind="fadeVisible: listStyle">
+    <!-- ko foreach: examsList -->
+        <li data-bind="attr: { class: 'exam_' + id_exam }"><span class="firstname" data-bind="text: firstname"></span> <span class="lastname" data-bind="text: lastname"></span> <span class="mark" data-bind="fadeVisible: $parent.marksVisible, text: mark"></span></li>
+    <!-- /ko -->
+</ul>
+<table data-bind="fadeVisible: tableStyle">
+    <thead>
+        <td><span data-bind="i18n: 'Firstname'"></span></td>
+        <td><span data-bind="i18n: 'Lastname'"></span></td>
+        <td data-bind="fadeVisible: marksVisible"><span data-bind="i18n: 'Mark'"></span></td>
+    </thead>
+    <tbody data-bind="foreach: examsList">
+        <tr data-bind="attr: { class: 'exam_' + id_exam }">
+            <td class="col"><span class="firstname" data-bind="text: firstname"></span></td>
+            <td class="col"><span class="lastname" data-bind="text: lastname"></span></td>
+            <td class="col" data-bind="fadeVisible: $parent.marksVisible"><span class="mark" data-bind="text: mark"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="pag">
+    <div class="pagination-previous" data-bind="fadeVisible: currentOption() !== 1">
+        <span data-bind="click: Previous"><i class="fas fa-angle-double-left"></i></span>
+    </div>
+    <div class="exams-pagination" data-bind="foreach: totalPages">
+        <span class="pagination"
+              data-bind="{
+                click: $parent.getExamsPaginated,
+                text: $data,
+                attr: {
+                    id: 'page-' + $data
+                },
+                css: $parent.CurrentPage() === $data ? '_active' : '' }"
+              style="cursor: pointer; padding: 5px; ">
+        </span>
+    </div>
+    <div class="pagination-next" data-bind="fadeVisible: currentOption() < totalOptions()">
+        <span data-bind="click: Next"><i class="fas fa-angle-double-right"></i></span>
+    </div>
+</div>
+
+<div class="actions">
+    <span data-bind="text: buttonActionText, click: showOrHideStudentsMark"></span>
+    <span class="icon-table" data-bind="fadeVisible: listStyle, click: changeToTableStyle">
+        <i class="fas fa-table"></i>
+        <span data-bind="i18n: 'Table Style'"></span>
+    </span>
+    <span class="icon-list" data-bind="fadeVisible: tableStyle, click: changeToListStyle">
+        <i class="fas fa-list"></i>
+        <span data-bind="i18n: 'List Style'"></span>
+    </span>
+    <span class="icon-higest-note" data-bind="click: getHighestNote">
+        <i class="fas fa-medal"></i>
+        <span data-bind="i18n: 'Highest note'"></span>
+    </span>
+</div>

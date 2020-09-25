@@ -28,7 +28,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct() : void
     {
         $this->_init(HiberusExamsResourceModel::class);
     }
@@ -37,7 +37,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * Get Identities
      * @return array|string[]
      */
-    public function getIdentities()
+    public function getIdentities() : array
     {
         $identities = [];
         if ($this->getIdExam()) {
@@ -50,7 +50,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * Get ID exam
      * @return array|int|mixed|null
      */
-    public function getIdExam()
+    public function getIdExam() : int
     {
         return $this->getData(self::ID_EXAM);
     }
@@ -60,7 +60,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * @param int $id
      * @return HiberusExams
      */
-    public function setIdExam($id)
+    public function setIdExam($id) : self
     {
         return $this->setData(self::ID_EXAM, $id);
     }
@@ -69,7 +69,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * Get Firstname
      * @return array|mixed|string|null
      */
-    public function getFirstname()
+    public function getFirstname() : string
     {
         return $this->getData(self::FIRSTNAME);
     }
@@ -79,7 +79,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * @param string $firstname
      * @return HiberusExams
      */
-    public function setFirstname($firstname)
+    public function setFirstname($firstname) : self
     {
         return $this->setData(self::FIRSTNAME, $firstname);
     }
@@ -88,7 +88,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * Get Lastname
      * @return array|mixed|string|null
      */
-    public function getLastname()
+    public function getLastname() : string
     {
         return $this->getData(self::LASTNAME);
     }
@@ -98,7 +98,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * @param string $lastname
      * @return HiberusExams
      */
-    public function setLastname($lastname)
+    public function setLastname($lastname) : self
     {
         return $this->setData(self::LASTNAME, $lastname);
     }
@@ -107,7 +107,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * Get Mark
      * @return array|float|mixed|null
      */
-    public function getMark()
+    public function getMark() : float
     {
         return $this->getData(self::MARK);
     }
@@ -117,7 +117,7 @@ class HiberusExams extends AbstractModel implements HiberusExamsInterface, Ident
      * @param float $mark
      * @return HiberusExams
      */
-    public function setMark($mark)
+    public function setMark($mark) : self
     {
         return $this->setData(self::MARK, $mark);
     }

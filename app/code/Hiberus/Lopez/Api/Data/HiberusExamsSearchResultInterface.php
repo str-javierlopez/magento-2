@@ -4,6 +4,7 @@
 namespace Hiberus\Lopez\Api\Data;
 
 use Hiberus\Lopez\Api\Data\HiberusExamsInterface;
+use Hiberus\Lopez\Model\ResourceModel\HiberusExams\Collection;
 
 /**
  * Interface HiberusExamsSearchResultInterface
@@ -11,6 +12,11 @@ use Hiberus\Lopez\Api\Data\HiberusExamsInterface;
  */
 interface HiberusExamsSearchResultInterface
 {
+
+    /**
+     * Collection Key
+     */
+    const COLLECTION_KEY = 'collection';
 
     /**
      * Get List of exams
@@ -30,13 +36,26 @@ interface HiberusExamsSearchResultInterface
      * Get total count
      * @return int
      */
-    public function getTotalCount();
+    public function getTotalCount() : int;
 
     /**
      * Set Total Count
      * @param int $size
      * @return mixed
      */
-    public function setTotalCount($size);
+    public function setTotalCount(int $size);
+
+    /**
+     * Get collection
+     * @return Collection
+     */
+    public function getCollection() : Collection;
+
+    /**
+     * Set Collection
+     * @param Collection $collection
+     * @return mixed
+     */
+    public function setCollection(Collection $collection);
 
 }

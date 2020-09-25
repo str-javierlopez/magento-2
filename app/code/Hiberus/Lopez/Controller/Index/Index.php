@@ -12,14 +12,34 @@ use Hiberus\Lopez\Api\ExamManagementInterface;
 use Magento\Framework\App\ObjectManager;
 use Hiberus\Lopez\Api\HiberusExamsRepositoryInterface;
 
+/**
+ * Class Index
+ * @package Hiberus\Lopez\Controller\Index
+ */
 class Index extends Action implements HttpGetActionInterface
 {
+    /**
+     * @var Csv
+     */
     private $_csv;
 
+    /**
+     * @var HiberusExamsParseCsvInterface
+     */
     private $_hiberusExamsParseCsv;
 
+    /**
+     * @var ExamManagementInterface
+     */
     private $_examManagement;
 
+    /**
+     * Index constructor.
+     * @param Context $context
+     * @param Csv $helper_csv_data
+     * @param HiberusExamsParseCsvInterface $hiberusExamsParseCsv
+     * @param ExamManagementInterface $examManagement
+     */
     public function __construct(
         Context $context,
         Csv $helper_csv_data,
@@ -32,6 +52,10 @@ class Index extends Action implements HttpGetActionInterface
         $this->_examManagement       = $examManagement;
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function execute()
     {
 
