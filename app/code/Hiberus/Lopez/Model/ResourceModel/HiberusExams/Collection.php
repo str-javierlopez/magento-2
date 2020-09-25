@@ -14,7 +14,7 @@ class Collection extends AbstractCollection
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct() : void
     {
         $this->_init(HiberusExams::class, ResourceModelHiberusExams::class);
     }
@@ -25,7 +25,7 @@ class Collection extends AbstractCollection
      * @param int $idExam
      * @return $this
      */
-    public function filterByIdExam($idExam)
+    public function filterByIdExam(int $idExam) : self
     {
         $this->addFieldToFilter('id_exam', $idExam);
         return $this;

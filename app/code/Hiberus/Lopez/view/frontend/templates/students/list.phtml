@@ -1,0 +1,14 @@
+<div class="students-list-content" data-bind="scope: 'studentsList'">
+    <h2 class="title"><?= __('Students'); ?></h2>
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*":
+         {
+            "Magento_Ui/js/core/app":  <?= /* @escapeNotVerified */ $block->getJsLayout(); ?>
+         }
+    }
+</script>
+

@@ -42,7 +42,7 @@ class HiberusExamsParseCsv implements HiberusExamsParseCsvInterface
      * @param array $data
      * @return array|false|HiberusExamsInterface[]
      */
-    public function parseData($data)
+    public function parseData(array $data)
     {
         if (!is_array($data)) {
             return false;

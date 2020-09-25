@@ -1,10 +1,11 @@
 <?php
 
-
 namespace Hiberus\Lopez\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
+use Hiberus\Lopez\Api\ExamManagementInterface;
+use Magento\Framework\Exception\LocalizedException;
 
 /**
  * Class Data
@@ -39,20 +40,38 @@ class Data extends AbstractHelper
     const XML_PATH_CRON_UPDATE_STUDENTS_CSV_PATH         = 'hiberus_modules_cron/hiberus_module_lopez_cron_update_studients/hiberus_module_lopez_cron_update_studients_csv_path';
 
     /**
+     * XML Path plugin is enabled
+     */
+    const XML_PATH_STUDENTS_NOT_PASS_PLUGIN_ENABLED     = 'hiberus_modules_general_config_section/hiberus_enabled_modules_group/hiberus_module_lopez_plugin_enabled';
+
+    /**
+     * XML Path plugin config
+     */
+    const XML_PATH_STUDENTS_NOT_PASS_PLUGIN_MARK        = 'hiberus_modules_general_config_section/hiberus_enabled_modules_group/hiberus_module_lopez_plugin_mark';
+
+    /**
+     * @var ExamManagementInterface
+     */
+    private $_examsManagementInterface;
+
+    /**
      * Data constructor.
      * @param Context $context
+     * ExamManagementInterface $examsManagementInterface
      */
     public function __construct(
-        Context $context
+        Context $context,
+        ExamManagementInterface $examsManagementInterface
     ) {
         parent::__construct($context);
+        $this->_examsManagementInterface = $examsManagementInterface;
     }
 
     /**
      * Retrieve if module is enabled
      * @return bool
      */
-    public function getModuleEnabled()
+    public function getModuleEnabled() : bool
     {
         return (bool) $this->scopeConfig->getValue(self::XML_PATH_MODULE_ENABLED);
     }
@@ -61,7 +80,7 @@ class Data extends AbstractHelper
      * Retrieve if cron is enabled
      * @return bool
      */
-    public function getModuleCronEnabled()
+    public function getModuleCronEnabled() : bool
     {
         return $this->getModuleEnabled()
             && (bool) $this->scopeConfig->getValue(self::XML_PATH_CRON_ENABLED);
@@ -90,9 +109,38 @@ class Data extends AbstractHelper
      * Retrieve CSV file path for cron of Students update
      * @return string
      */
-    public function cronUpdateStudentsCsvPath()
+    public function cronUpdateStudentsCsvPath() : string
     {
         return trim($this->scopeConfig->getValue(self::XML_PATH_CRON_UPDATE_STUDENTS_CSV_PATH));
     }
 
+    /**
+     * Retrieve if plugin is enabled
+     * @return bool
+     */
+    public function getPluginEnabled() : bool
+    {
+        return $this->getModuleEnabled() && $this->scopeConfig->getValue(self::XML_PATH_STUDENTS_NOT_PASS_PLUGIN_ENABLED);
+    }
+
+    /**
+     * Retrieve plugin config
+     * @return float
+     */
+    public function getPluginConfigMark() : float
+    {
+        $value = (float) $this->scopeConfig->getValue(self::XML_PATH_STUDENTS_NOT_PASS_PLUGIN_MARK);
+        return !isset($value) ? 4.9 : number_format($value, 2);
+    }
+
+    /**
+     * Return all exams
+     * @return array
+     * @throws LocalizedException
+     */
+    public function getAllStudentsExams() : array
+    {
+        $searchResult = $this->_examsManagementInterface->getList();
+        return $this->_examsManagementInterface->searchResultItemsToArray($searchResult);
+    }
 }

@@ -38,6 +38,18 @@
                     <label>Decimales</label>
                     <comment>Precisión para la nota del alumno. Por defecto 2.</comment>
                 </field>
+                <field id="hiberus_module_lopez_plugin_enabled" translate="label" type="select" showInDefault="1" showInWebsite="1">
+                    <label>Poner otra nota a los alumnos suspensos</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Los alumnos que estén suspensos aparecerán con una nota diferente a la real.</comment>
+                </field>
+                <field id="hiberus_module_lopez_plugin_mark" translate="label" type="text" showInDefault="1" showInWebsite="1">
+                    <depends>
+                        <field id="hiberus_modules_general_config_section/hiberus_enabled_modules_group/hiberus_module_lopez_plugin_enabled">1</field>
+                    </depends>
+                    <label>Nota para los alumnos suspensos</label>
+                    <comment>Por defecto '4.9'.</comment>
+                </field>
             </group>
         </section>
 

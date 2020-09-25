@@ -8,6 +8,8 @@ use Hiberus\Lopez\Model\ResourceModel\HiberusExams\CollectionFactory as HiberusE
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface;
+use Hiberus\Lopez\Model\ResourceModel\HiberusExams\Collection;
+use Magento\Framework\Api\SearchResults;
 
 /**
  * Class ExamManagement
@@ -47,24 +49,57 @@ class ExamManagement implements ExamManagementInterface
     }
 
     /**
-     * Get List of Hiberus Exams
+     * Get List of Hiberus Exams filter by criteria
      * @param SearchCriteriaInterface $searchCriteria
-     * @return HiberusExamsSearchResultInterface|HiberusExamsSearchResultInterface[]
+     * @return SearchResults | HiberusExamsSearchResultInterface|HiberusExamsSearchResultInterface[]
      */
-    public function getList(SearchCriteriaInterface $searchCriteria) : HiberusExamsSearchResultInterface
+    public function getListByCriteria(SearchCriteriaInterface $searchCriteria) : SearchResults
     {
         $collection = $this->_hiberusExamsCollection->create();
 
-        if (isset($searchCriteria)) {
-            $this->_collectionProcessor->process($searchCriteria, $collection);
-        }
+        $this->_collectionProcessor->process($searchCriteria, $collection);
 
+        return $this->prepareCollection($collection);
+    }
+
+    /**
+     * Get List of Hiberus Exams
+     * @return SearchResults | HiberusExamsSearchResultInterface|HiberusExamsSearchResultInterface[]
+     */
+    public function getList() : HiberusExamsSearchResultInterface
+    {
+        $collection = $this->_hiberusExamsCollection->create();
+
+        return $this->prepareCollection($collection);
+    }
+
+    /**
+     * @param Collection $collection
+     * @return SearchResults | HiberusExamsSearchResultInterface | HiberusExamsSearchResultInterface[]
+     */
+    private function prepareCollection(Collection $collection) : HiberusExamsSearchResultInterface
+    {
         $searchResults = $this->_searchResultFactory->create();
 
         $searchResults->setItems($collection->getItems());
-
+        $searchResults->setCollection($collection);
         $searchResults->setTotalCount($collection->getSize());
 
         return $searchResults;
+    }
+
+    /**
+     * Convert search result items in array
+     * @param HiberusExamsSearchResultInterface $searchResults
+     * @return array
+     */
+    public function searchResultItemsToArray(HiberusExamsSearchResultInterface $searchResults) : array
+    {
+        $items = $searchResults->getItems();
+        $itemsArray = [];
+        foreach ($items as $item) {
+            array_push($itemsArray, $item->getData());
+        }
+        return $itemsArray;
     }
 }
