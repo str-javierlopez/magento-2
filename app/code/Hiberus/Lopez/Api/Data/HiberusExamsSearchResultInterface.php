@@ -13,9 +13,10 @@ use Hiberus\Lopez\Model\ResourceModel\HiberusExams\Collection;
 interface HiberusExamsSearchResultInterface
 {
 
+    /**
+     * Collection Key
+     */
     const COLLECTION_KEY = 'collection';
-
-    const DATA_KEY       = 'data';
 
     /**
      * Get List of exams
@@ -44,8 +45,17 @@ interface HiberusExamsSearchResultInterface
      */
     public function setTotalCount(int $size);
 
+    /**
+     * Get collection
+     * @return Collection
+     */
     public function getCollection() : Collection;
 
+    /**
+     * Set Collection
+     * @param Collection $collection
+     * @return mixed
+     */
     public function setCollection(Collection $collection);
 
 }

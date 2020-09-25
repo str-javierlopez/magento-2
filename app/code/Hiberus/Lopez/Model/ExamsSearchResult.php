@@ -2,24 +2,40 @@
 
 namespace Hiberus\Lopez\Model;
 
+use Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface;
 use Hiberus\Lopez\Model\ResourceModel\HiberusExams\Collection;
+use Magento\Framework\Api\AbstractSimpleObject;
 use Magento\Framework\Api\SearchCriteria;
 use Magento\Framework\Api\SearchCriteriaInterface;
-use Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface;
-use Magento\Framework\Api\AbstractSimpleObject;
+use Magento\Framework\Api\AbstractExtensibleObject;
 
+/**
+ * Class ExamsSearchResult
+ * @package Hiberus\Lopez\Model
+ */
 class ExamsSearchResult extends AbstractSimpleObject implements HiberusExamsSearchResultInterface
 {
+    /**
+     * Key Items
+     */
     const KEY_ITEMS = 'items';
+
+    /**
+     * Key search criteria
+     */
     const KEY_SEARCH_CRITERIA = 'search_criteria';
+
+    /**
+     * Key total count
+     */
     const KEY_TOTAL_COUNT = 'total_count';
 
     /**
      * Get items
      *
-     * @return \Magento\Framework\Api\AbstractExtensibleObject[]
+     * @return AbstractExtensibleObject[]
      */
-    public function getItems()
+    public function getItems() : array
     {
         return $this->_get(self::KEY_ITEMS) === null ? [] : $this->_get(self::KEY_ITEMS);
     }
@@ -27,7 +43,7 @@ class ExamsSearchResult extends AbstractSimpleObject implements HiberusExamsSear
     /**
      * Set items
      *
-     * @param \Magento\Framework\Api\AbstractExtensibleObject[] $items
+     * @param AbstractExtensibleObject[] $items
      * @return $this
      */
     public function setItems(array $items) : self
@@ -77,14 +93,22 @@ class ExamsSearchResult extends AbstractSimpleObject implements HiberusExamsSear
         return $this->setData(self::KEY_TOTAL_COUNT, $count);
     }
 
+    /**
+     * Get Collection
+     * @return Collection
+     */
     public function getCollection(): Collection
     {
         return $this->_get(self::COLLECTION_KEY);
     }
 
+    /**
+     * Set Collection
+     * @param Collection $collection
+     * @return $this
+     */
     public function setCollection(Collection $collection) : self
     {
         return $this->setData(self::COLLECTION_KEY, $collection);
     }
-
 }

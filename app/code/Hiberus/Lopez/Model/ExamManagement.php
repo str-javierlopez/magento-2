@@ -74,21 +74,6 @@ class ExamManagement implements ExamManagementInterface
     }
 
     /**
-     * @param Collection $collection
-     * @return SearchResults | HiberusExamsSearchResultInterface | HiberusExamsSearchResultInterface[]
-     */
-    private function prepareCollection(Collection $collection) : HiberusExamsSearchResultInterface
-    {
-        $searchResults = $this->_searchResultFactory->create();
-
-        $searchResults->setItems($collection->getItems());
-        $searchResults->setCollection($collection);
-        $searchResults->setTotalCount($collection->getSize());
-
-        return $searchResults;
-    }
-
-    /**
      * Convert search result items in array
      * @param HiberusExamsSearchResultInterface $searchResults
      * @return array
@@ -101,5 +86,21 @@ class ExamManagement implements ExamManagementInterface
             array_push($itemsArray, $item->getData());
         }
         return $itemsArray;
+    }
+
+    /**
+     * Prepare Collection into a HiberusExamsSearchResultInterface Object
+     * @param Collection $collection
+     * @return SearchResults | HiberusExamsSearchResultInterface | HiberusExamsSearchResultInterface[]
+     */
+    private function prepareCollection(Collection $collection) : HiberusExamsSearchResultInterface
+    {
+        $searchResults = $this->_searchResultFactory->create();
+
+        $searchResults->setItems($collection->getItems());
+        $searchResults->setCollection($collection);
+        $searchResults->setTotalCount($collection->getSize());
+
+        return $searchResults;
     }
 }
