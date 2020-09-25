@@ -2,7 +2,10 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
-        <route id="_hiberus" frontName="test">
+        <route id="_hiberusTest" frontName="test">
+            <module name="Hiberus_Lopez"/>
+        </route>
+        <route id="hiberus" frontName="lopez">
             <module name="Hiberus_Lopez"/>
         </route>
     </router>

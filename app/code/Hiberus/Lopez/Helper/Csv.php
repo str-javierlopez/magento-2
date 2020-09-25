@@ -41,6 +41,9 @@ class Csv extends AbstractHelper
      */
     private $_fileCsv;
 
+    /**
+     * @var File
+     */
     private $_file;
 
     /**
@@ -71,7 +74,7 @@ class Csv extends AbstractHelper
      * Retrieve minimal mark
      * @return int
      */
-    private function getMinMark()
+    private function getMinMark() : int
     {
         return (int) $this->scopeConfig->getValue(self::XML_PATH_MIN_MARK);
     }
@@ -80,20 +83,20 @@ class Csv extends AbstractHelper
      * Retrieve max mark
      * @return int|mixed
      */
-    private function getMaxMark()
+    private function getMaxMark() : int
     {
         $value = $this->scopeConfig->getValue(self::XML_PATH_MAX_MARK);
-        return isset($value) ? $value : 10;
+        return isset($value) ? intval($value) : 10;
     }
 
     /**
      * Retrieve precision of mark
      * @return int|mixed
      */
-    private function getDecimalsMark()
+    private function getDecimalsMark() : int
     {
         $value = $this->scopeConfig->getValue(self::XML_PATH_DECIMALS_MARK);
-        return isset($value) ? $value : 2;
+        return isset($value) ? intval($value) : 2;
     }
 
     /**
@@ -131,7 +134,12 @@ class Csv extends AbstractHelper
         return $dataFile;
     }
 
-    private function removeFile($filepath)
+    /**
+     * Remove a file by path
+     * @param $filepath
+     * @throws FileSystemException
+     */
+    private function removeFile($filepath) : void
     {
         try {
             $this->_file->deleteFile($filepath);
@@ -145,7 +153,7 @@ class Csv extends AbstractHelper
      * Retrieve last filename processed
      * @return mixed
      */
-    public function getLastFilenameProcessed()
+    public function getLastFilenameProcessed() : string
     {
         return $this->_filename;
     }
@@ -156,7 +164,7 @@ class Csv extends AbstractHelper
      * @return string
      * @throws FileSystemException
      */
-    private function concatPathWithMediaPath($filename)
+    private function concatPathWithMediaPath($filename) : string
     {
         $filenameArray = explode('/', $filename);
         $mediaPath     = $this->_directoryList->getPath(DirectoryList::MEDIA);
@@ -179,7 +187,7 @@ class Csv extends AbstractHelper
      * Retrieve a random mark
      * @return string
      */
-    public function generateRandomMark()
+    public function generateRandomMark() : string
     {
         $min        = $this->getMinMark();
         $max        = $this->getMaxMark();

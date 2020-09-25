@@ -16,6 +16,13 @@ interface ExamManagementInterface
      * @return HiberusExamsSearchResultInterface[]
      * @throws LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria);
+    public function getListByCriteria(SearchCriteriaInterface $searchCriteria);
+
+    /**
+     * Retrieve all exams
+     * @return HiberusExamsSearchResultInterface[]
+     * @throws LocalizedException
+     */
+    public function getList();
 
 }

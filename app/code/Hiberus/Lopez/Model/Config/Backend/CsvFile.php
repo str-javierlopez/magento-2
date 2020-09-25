@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hiberus\Lopez\Model\Config\Backend;
 
 use Magento\Config\Model\Config\Backend\File;
@@ -15,15 +14,42 @@ use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Data\Collection\AbstractDb;
 use Hiberus\Lopez\Cron\UpdateStudentsFromCsv;
 
+/**
+ * Class CsvFile
+ * @package Hiberus\Lopez\Model\Config\Backend
+ */
 class CsvFile extends File
 {
 
+    /**
+     *
+     */
     const UPLOAD_DIR = 'hiberusCsv';
 
+    /**
+     * @var UpdateStudentsFromCsv
+     */
     private $_updateStudentsFromCsv;
 
+    /**
+     * @var
+     */
     private $_path;
 
+    /**
+     * CsvFile constructor.
+     * @param Context $context
+     * @param Registry $registry
+     * @param ScopeConfigInterface $config
+     * @param TypeListInterface $cacheTypeList
+     * @param UploaderFactory $uploaderFactory
+     * @param RequestDataInterface $requestData
+     * @param Filesystem $filesystem
+     * @param UpdateStudentsFromCsv $updateStudentsFromCsv
+     * @param AbstractResource|null $resource
+     * @param AbstractDb|null $resourceCollection
+     * @param array $data
+     */
     public function __construct(
         Context $context,
         Registry $registry,
@@ -52,21 +78,31 @@ class CsvFile extends File
         $this->_updateStudentsFromCsv = $updateStudentsFromCsv;
     }
 
-    protected function _getUploadDir()
+    /**
+     * Retrieve the upload path of the file
+     * @return string
+     */
+    protected function _getUploadDir() : string
     {
         $this->_path = $this->_mediaDirectory->getAbsolutePath(self::UPLOAD_DIR);
 
         return $this->_path;
     }
 
-    public function afterSave()
+    /**
+     * @return CsvFile|void
+     */
+    public function afterSave() : void
     {
         $this->_updateStudentsFromCsv->_csvFilePath    = $this->_path;
         $this->_updateStudentsFromCsv->_isAbsolutePath = true;
         $this->_updateStudentsFromCsv->execute();
     }
 
-    public function getAllowedExtensions()
+    /**
+     * @return string[]
+     */
+    public function getAllowedExtensions() : array
     {
         return ['text/csv'];
     }

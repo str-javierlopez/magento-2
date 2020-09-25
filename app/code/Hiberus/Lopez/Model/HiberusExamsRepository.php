@@ -72,7 +72,7 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
      * @return bool
      * @throws CouldNotSaveException
      */
-    public function save($hiberusExam)
+    public function save($hiberusExam) : bool
     {
         try {
             $this->_resource->save($hiberusExam);
@@ -85,10 +85,10 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
     /**
      * Get Hiberus Exam By ID
      * @param $idExam
-     * @return HiberusExamsInterface|HiberusExams
+     * @return HiberusExamsInterface
      * @throws NoSuchEntityException
      */
-    public function getByIdExam($idExam)
+    public function getByIdExam($idExam) : HiberusExamsInterface
     {
         $hiberusExams = $this->_hiberusExamsFactory->create();
         $this->_resource->load($hiberusExams, $idExam);
@@ -122,7 +122,7 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */
-    public function deleteByIdExam($idExam)
+    public function deleteByIdExam($idExam) : bool
     {
         return $this->delete($this->getByIdExam($idExam));
     }
