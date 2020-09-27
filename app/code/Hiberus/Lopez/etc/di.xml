@@ -13,4 +13,21 @@
             </argument>
         </arguments>
     </type>
+
+<!--    <type name="Hiberus\Lopez\Ui\DataProvider\Exams\ListingDataProvider">
+        <plugin name="students_grid_exams_attributes" type="Hiberus\Lopez\Plugin\AddAttributesToUiDataProvider"/>
+    </type>-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="students_grid_exams_listing_data_source" xsi:type="string">StudentsGridExamsCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="StudentsGridExamsCollection" type="Hiberus\Lopez\Ui\DataProvider\Exams\Listing\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">hiberus_exam</argument>
+            <argument name="resourceModel" xsi:type="string">Hiberus\Lopez\Model\ResourceModel\HiberusExams</argument>
+        </arguments>
+    </virtualType>
 </config>
