@@ -22,6 +22,14 @@
              resource="Hiberus_Lopez::configuration_general"
              parent="Hiberus_Lopez::menu"
         />
+        <add id="Hiberus_Lopez::manage_students_exams"
+             title="Gestionar Exámenes de Alumnos"
+             module="Hiberus_Lopez"
+             sortOrder="12"
+             action="students_grid/index/index"
+             resource="Hiberus_Lopez::manage_students_exams"
+             parent="Hiberus_Lopez::menu"
+        />
         <add id="Hiberus_Lopez::import_students"
              title="Importar Notas de Alumnos"
              module="Hiberus_Lopez"

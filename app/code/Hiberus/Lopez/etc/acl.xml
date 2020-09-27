@@ -7,6 +7,7 @@
                     <resource id="Hiberus_Lopez::cron" title="Cron" sortOrder="10"/>
                     <resource id="Hiberus_Lopez::configuration_general" title="Configuración" sortOrder="20" />
                     <resource id="Hiberus_Lopez::import_students" title="Importar Notas de alumnos" sortOrder="30" />
+                    <resource id="Hiberus_Lopez::manage_students_exams" title="Gestionar notas de alumnos" sortOrder="40" />
                 </resource>
             </resource>
         </resources>
