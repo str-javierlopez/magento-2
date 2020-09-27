@@ -51,9 +51,9 @@ class ExamManagement implements ExamManagementInterface
     /**
      * Get List of Hiberus Exams filter by criteria
      * @param SearchCriteriaInterface $searchCriteria
-     * @return SearchResults | HiberusExamsSearchResultInterface|HiberusExamsSearchResultInterface[]
+     * @return HiberusExamsSearchResultInterface|HiberusExamsSearchResultInterface[]
      */
-    public function getListByCriteria(SearchCriteriaInterface $searchCriteria) : SearchResults
+    public function getListByCriteria(SearchCriteriaInterface $searchCriteria) : HiberusExamsSearchResultInterface
     {
         $collection = $this->_hiberusExamsCollection->create();
 

@@ -5,4 +5,12 @@
     <preference for="Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface" type="Hiberus\Lopez\Model\ExamsSearchResult" />
     <preference for="Hiberus\Lopez\Api\Data\HiberusExamsParseCsvInterface"     type="Hiberus\Lopez\Model\HiberusExamsParseCsv" />
     <preference for="Hiberus\Lopez\Api\HiberusExamsRepositoryInterface"        type="Hiberus\Lopez\Model\HiberusExamsRepository" />
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="hiberus_lopez_command_view_students" xsi:type="object">Hiberus\Lopez\Console\Command\ViewStudentsExams</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
