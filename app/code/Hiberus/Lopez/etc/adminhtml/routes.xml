@@ -4,5 +4,8 @@
         <route id="hiberus_lopez_cron" frontName="hiberus_cron">
             <module name="Hiberus_Lopez" />
         </route>
+        <route id="students_grid" frontName="students_grid">
+            <module name="Hiberus_Lopez" before="Magento_Backend" />
+        </route>
     </router>
 </config>
