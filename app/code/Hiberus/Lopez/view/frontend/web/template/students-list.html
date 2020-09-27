@@ -1,8 +1,9 @@
 
 <ul data-bind="fadeVisible: listStyle">
     <!-- ko foreach: examsList -->
-        <li data-bind="attr: { class: 'exam_' + id_exam }"><span class="firstname" data-bind="text: firstname"></span> <span class="lastname" data-bind="text: lastname"></span> <span class="mark" data-bind="fadeVisible: $parent.marksVisible, text: mark"></span></li>
+    <li data-bind="attr: { class: 'exam_' + id_exam }"><span class="firstname" data-bind="text: firstname"></span> <span class="lastname" data-bind="text: lastname"></span> <span class="mark" data-bind="fadeVisible: $parent.marksVisible, text: mark"></span> <i class="highest-mark fas fa-medal hidden"></i></li>
     <!-- /ko -->
+    <li class="average-info"><span data-bind="i18n: 'Average Students:'"></span> <span data-bind="text: averageMarkStudents"></span></li>
 </ul>
 <table data-bind="fadeVisible: tableStyle">
     <thead>
@@ -15,8 +16,15 @@
             <td class="col"><span class="firstname" data-bind="text: firstname"></span></td>
             <td class="col"><span class="lastname" data-bind="text: lastname"></span></td>
             <td class="col" data-bind="fadeVisible: $parent.marksVisible"><span class="mark" data-bind="text: mark"></span></td>
+            <td class="col"><i class="highest-mark fas fa-medal hidden"></i></td>
         </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td><span data-bind="i18n: 'Average Students:'"></span></td>
+            <td><span data-bind="text: averageMarkStudents"></span></td>
+        </tr>
+    </tfoot>
 </table>
 
 <div class="pag">
@@ -50,8 +58,16 @@
         <i class="fas fa-list"></i>
         <span data-bind="i18n: 'List Style'"></span>
     </span>
-    <span class="icon-higest-note" data-bind="click: getHighestNote">
+    <span class="icon-highest-note" data-bind="click: getHighestNote">
         <i class="fas fa-medal"></i>
         <span data-bind="i18n: 'Highest note'"></span>
     </span>
+</div>
+
+<div class="student-highest-mark-info" data-bind="fadeVisible: highestMarkSection">
+    <div class="header">
+        <h3 class="title" data-bind="i18n: 'Highest mark'"></h3>
+        <span class="hide-secction" data-bind="click: hideHighestMarkSection"><i class="fas fa-times"></i></span>
+    </div>
+    <span class="subtitle" data-bind="text: studentWithHighestMark"></span>
 </div>
