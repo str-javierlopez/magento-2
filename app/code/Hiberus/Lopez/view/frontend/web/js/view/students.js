@@ -24,6 +24,9 @@ define([
         currentOption: ko.observable(),
         examsList: ko.observableArray(),
         totalPages: ko.observableArray(),
+        studentWithHighestMark: ko.observable(),
+        highestMarkSection: ko.observable(false),
+        averageMarkStudents: ko.observable(),
 
         /**
          *
@@ -33,6 +36,7 @@ define([
             this._super();
             this.customFade();
             this.examsList(this.getStudentsList());
+            this.getAverageStudents();
             this.buttonActionText(this.buttonActionTextWhenVisible);
             this.Pager();
             return this;
@@ -57,15 +61,34 @@ define([
             this.tableStyle(true);
         },
         getHighestNote: function () {
-            const exams = this.getStudentsList();
-            const exam  = underscore.max(exams, function (exam, index) {
+            const exams         = this.getStudentsList();
+            const exam          = underscore.max(exams, function (exam, index) {
                 return exam.mark;
             });
+            const isInPage      = this.searchPageStudentExamById(exam.id_exam);
+            const message       = $t('Has the highest grade with a');
+            const pageMessage   = $t('He is on page');
+            let completeMessage = exam.firstname + ' ' + exam.lastname + ' ' + message + ' ' + exam.mark;
+            completeMessage     += '. ' + pageMessage + ' ' + isInPage;
+            this.studentWithHighestMark(completeMessage);
 
-            this.selectExamById(exam.id_exam);
+            jQuery('.highest-mark').addClass('hidden');
+            jQuery('.exam_' + exam.id_exam + ' .highest-mark').removeClass('hidden');
+            this.highestMarkSection(true);
         },
-        selectExamById: function (id_exam) {
-            jQuery('.exam_' + id_exam).css('color', 'green');
+        hideHighestMarkSection: function () {
+            this.highestMarkSection(false);
+        },
+        getAverageStudents: function () {
+            const exams = this.getStudentsList();
+            const size  = underscore.size(exams);
+            const sumMarks = underscore.reduce(exams, function (itemMemory, item) {
+                const markMemory = !!itemMemory.mark ? parseFloat(itemMemory.mark) : itemMemory;
+                const mark       = parseFloat(item.mark);
+                return markMemory + mark;
+            });
+            const average = (sumMarks / size).toFixed(2);
+            this.averageMarkStudents(average);
         },
         getTotalPages: function () {
 
@@ -137,6 +160,23 @@ define([
             self.getExamsPaginated = function (page) {
                 self.CurrentPage(page);
             };
+        },
+        getIsPageShowing: function (pageToCheck) {
+            return  underscore.find(this.totalPages(), function (page, index) {
+                return page === pageToCheck;
+            });
+        },
+        searchIndexInArrayPages: function (pageToSearch) {
+            return underscore.findIndex(this.allPages(), function (page) {
+                return page === pageToSearch;
+            });
+        },
+        searchPageStudentExamById: function (idExam) {
+            const studentsExams = this.getStudentsList();
+            const examKey       = underscore.findIndex(studentsExams, function (item) {
+                return item.id_exam === idExam;
+            });
+            return Math.ceil(examKey / this.DataPerPage()) + 1;
         },
         customFade: function() {
             ko.bindingHandlers.fadeVisible = {
