@@ -22,7 +22,7 @@ interface HiberusExamsRepositoryInterface
      * @throws NoSuchEntityException
      * @throws LocalizedException
      */
-    public function save($hiberusExam);
+    public function save($hiberusExam) : bool;
 
     /**
      * Retrieve exam by id

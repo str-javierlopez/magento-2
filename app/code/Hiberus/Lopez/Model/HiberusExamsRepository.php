@@ -79,7 +79,7 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__($exception->getMessage()));
         }
-        return $hiberusExam;
+        return true;
     }
 
     /**

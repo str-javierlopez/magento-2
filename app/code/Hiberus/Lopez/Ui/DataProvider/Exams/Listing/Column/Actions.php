@@ -53,11 +53,17 @@ class Actions extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $name = $this->getData('name');
-                if (isset($item['entity_id'])) {
-                    $item[$name]['view']   = [
-                        'href'  => $this->_urlBuilder->getUrl($this->_viewUrl, ['id' => $item['entity_id']]),
+                if (isset($item['id_exam'])) {
+                    $params = [
+                        'id_exam' => $item['id_exam'],
+                        'firstname' => $item['firstname'],
+                        'lastname' => $item['lastname'],
+                        'mark' => $item['mark'],
+                    ];
+                    $item[$name]['edit']   = [
+                        'href'  => $this->_urlBuilder->getUrl('students_grid/edit/index', $params),
                         'target' => '_blank',
-                        'label' => __('View on Frontend')
+                        'label' => __('Edit')
                     ];
                 }
             }
