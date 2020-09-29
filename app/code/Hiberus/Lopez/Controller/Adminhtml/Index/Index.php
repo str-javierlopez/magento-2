@@ -38,7 +38,7 @@ class Index extends Action implements HttpGetActionInterface
     public function execute(): Page
     {
         $resultPage = $this->pageFactory->create();
-        // $resultPage->setActiveMenu('Hiberus_Lopez::menu');
+        $resultPage->setActiveMenu('Hiberus_Lopez::menu');
         $resultPage->getConfig()->getTitle()->prepend(__('Manage Students Exams'));
 
         return $resultPage;
