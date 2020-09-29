@@ -5,6 +5,7 @@
     <preference for="Hiberus\Lopez\Api\Data\HiberusExamsSearchResultInterface" type="Hiberus\Lopez\Model\ExamsSearchResult" />
     <preference for="Hiberus\Lopez\Api\Data\HiberusExamsParseCsvInterface"     type="Hiberus\Lopez\Model\HiberusExamsParseCsv" />
     <preference for="Hiberus\Lopez\Api\HiberusExamsRepositoryInterface"        type="Hiberus\Lopez\Model\HiberusExamsRepository" />
+    <preference for="Hiberus\Lopez\Api\GetApiStudentsExamsInterface"           type="Hiberus\Lopez\Service\GetApiStudentsExams" />
 
     <type name="Magento\Framework\Console\CommandListInterface">
         <arguments>
