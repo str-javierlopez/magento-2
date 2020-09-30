@@ -3,28 +3,20 @@
     <route method="GET" url="/V1/students/getExams">
         <service class="Hiberus\Lopez\Api\GetApiStudentsExamsInterface" method="getExamsList"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Hiberus_Lopez::api_use"/>
         </resources>
     </route>
-    <route method="POST" url="/V1/students/delete">
+    <route method="DELETE" url="/V1/students/delete">
         <service class="Hiberus\Lopez\Api\GetApiStudentsExamsInterface" method="removeExamById"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Hiberus_Lopez::api_use"/>
         </resources>
-        <data>
-            <parameter name="id_exam" force="true">%id_exam%</parameter>
-        </data>
     </route>
 
     <route method="POST" url="/V1/students/addStudentExam">
         <service class="Hiberus\Lopez\Api\GetApiStudentsExamsInterface" method="addStudentExam"/>
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="Hiberus_Lopez::api_use"/>
         </resources>
-        <data>
-            <parameter name="firstname" force="true">%firstname%</parameter>
-            <parameter name="lastname"  force="true">%lastname%</parameter>
-            <parameter name="mark"      force="true">%mark%</parameter>
-        </data>
     </route>
 </routes>

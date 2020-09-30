@@ -9,10 +9,11 @@ use Hiberus\Lopez\Api\HiberusExamsRepositoryInterface;
 use Hiberus\Lopez\Model\HiberusExamsFactory;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Setup\Exception;
+use Hiberus\Lopez\Helper\Csv as HelperCsv;
 
 /**
  * Class Api
@@ -41,23 +42,66 @@ class Api extends AbstractHelper
      */
     public $_exceptionsMessages;
 
+    private $_helperCsv;
+
+    /**
+     * @var array
+     */
+    public $_requestParams = [];
+
     /**
      * Api constructor.
      * @param Context $context
      * @param ExamManagementInterface $examManagement
      * @param HiberusExamsRepositoryInterface $hiberusExamsRepository
      * @param HiberusExamsFactory $hiberusExamsFactory
+     * @param HelperCsv $helperCsv
      */
     public function __construct(
         Context $context,
         ExamManagementInterface $examManagement,
         HiberusExamsRepositoryInterface $hiberusExamsRepository,
-        HiberusExamsFactory $hiberusExamsFactory
+        HiberusExamsFactory $hiberusExamsFactory,
+        HelperCsv $helperCsv
     ) {
         $this->_examManager            = $examManagement;
         $this->_hiberusExamsRepository = $hiberusExamsRepository;
         $this->_hiberusExamsFactory    = $hiberusExamsFactory;
+        $this->_helperCsv              = $helperCsv;
         parent::__construct($context);
+    }
+
+    /**
+     * Validate if is posible remove an exam
+     * @return bool
+     */
+    public function canRemoveExam()
+    {
+        return isset($this->_requestParams['id_exam']);
+    }
+
+    /**
+     * Validate if is posible create an exam
+     * @return bool
+     */
+    public function canCreateExam()
+    {
+        return isset($this->_requestParams['firstname']) && isset($this->_requestParams['lastname']);
+    }
+
+    /**
+     * Validate the request
+     * @return bool
+     */
+    public function validateRequest()
+    {
+        if (!$this->_request->isPost() && !$this->_request->isGet() && !$this->_request->isDelete()) {
+            return false;
+        }
+
+        $this->_requestParams = $this->_request->getParams();
+
+        return true;
     }
 
     /**
@@ -83,7 +127,7 @@ class Api extends AbstractHelper
     {
         try {
             $this->_hiberusExamsRepository->deleteByIdExam($idExam);
-        } catch (CouldNotDeleteException $exception) {
+        } catch (Exception $exception) {
             $this->_exceptionsMessages = $exception->getMessage();
             return false;
         }
@@ -92,12 +136,14 @@ class Api extends AbstractHelper
 
     /**
      * Create a student exam
-     * @param $params
      * @return bool
+     * @throws Exception
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
      */
-    public function createStudentExam($params) : bool
+    public function createStudentExam() : bool
     {
-        $hiberusExam = $this->createHiberusStudentExam($params);
+        $hiberusExam = $this->createHiberusStudentExam($this->_requestParams);
         return $this->saveHiberusStudentExam($hiberusExam);
     }
 
@@ -123,13 +169,19 @@ class Api extends AbstractHelper
      * Create a hiberus student exam object
      * @param $params
      * @return HiberusExamsInterface
+     * @throws Exception
      */
     private function createHiberusStudentExam($params) : HiberusExamsInterface
     {
         $hiberusExam = $this->_hiberusExamsFactory->create();
         $hiberusExam->setFirstname($params['firstname']);
         $hiberusExam->setLastname($params['lastname']);
-        $hiberusExam->setMark($params['mark']);
+        $mark = !isset($params['mark']) ? $this->_helperCsv->generateRandomMark() : $params['mark'];
+        $mark = floatval($mark);
+        if ($mark < 0 || $mark > 10) {
+            throw new Exception(__('The mark must be between 0 and 10.'));
+        }
+        $hiberusExam->setMark($mark);
         return $hiberusExam;
     }
 }

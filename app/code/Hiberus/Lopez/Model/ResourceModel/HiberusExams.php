@@ -43,7 +43,7 @@ class HiberusExams extends AbstractDb
     {
         $select = parent::_getLoadSelect($field, $value, $object);
         if ($field == $this->_primaryKeyField) {
-            $select->order($this->_primaryKeyField . Select::SQL_ASC)->limit(1);
+            $select->order($this->_primaryKeyField . ' ' . Select::SQL_ASC)->limit(1);
         }
         return $select;
     }

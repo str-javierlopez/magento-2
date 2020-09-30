@@ -21,11 +21,11 @@ interface GetApiStudentsExamsInterface
      * Delete student exam by id
      * @return Json
      */
-    public function removeExamById() : Json;
+    public function removeExamById() : string;
 
     /**
      * Create a new student exam
      * @return Json
      */
-    public function addStudentExam() : Json;
+    public function addStudentExam() : string;
 }

@@ -92,8 +92,8 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
     {
         $hiberusExams = $this->_hiberusExamsFactory->create();
         $this->_resource->load($hiberusExams, $idExam);
-        if (!$hiberusExams->getIdExam()) {
-            throw new NoSuchEntityException(__('Exam with id "%1" does not exists.', $idExam));
+        if (!$hiberusExams->getId()) {
+            throw new NoSuchEntityException(__('Exam does not exists.'));
         }
         return $hiberusExams;
     }
