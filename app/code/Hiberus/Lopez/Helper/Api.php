@@ -95,7 +95,7 @@ class Api extends AbstractHelper
      * @param $params
      * @return bool
      */
-    public function createStudentExam($params)
+    public function createStudentExam($params) : bool
     {
         $hiberusExam = $this->createHiberusStudentExam($params);
         return $this->saveHiberusStudentExam($hiberusExam);

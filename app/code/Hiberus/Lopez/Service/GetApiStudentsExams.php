@@ -160,20 +160,23 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
 
     /**
      * Add Student exam Api action
-     * @return Json
+     * @return string
      */
-    public function addStudentExam(): Json
+    public function addStudentExam(): string
     {
-        $response = $this->_jsonFactory->create()->setData(['status' => false]);
+        $response = ['status' => false];
         if (!$this->validateRequest()) {
-            return $response;
+            return json_encode($response);
         }
         if (!$this->canCreateExam()) {
-            return $response;
+            return json_encode($response);
         }
 
-        $this->_helperApi->createStudentExam($this->_requestParams);
-        return $response;
+        $saved = $this->_helperApi->createStudentExam($this->_requestParams);
+
+        $response['status'] = $saved;
+
+        return json_encode($response);
     }
 
 }
