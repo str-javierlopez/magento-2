@@ -4,6 +4,7 @@ namespace Hiberus\Lopez\Model;
 
 use Hiberus\Lopez\Api\Data\HiberusExamsInterface;
 use Hiberus\Lopez\Api\HiberusExamsRepositoryInterface;
+use Hiberus\Lopez\Exception\StudentExamCouldNotAddedException;
 use Hiberus\Lopez\Model\ResourceModel\HiberusExams as ResourceHiberusExams;
 use Hiberus\Lopez\Model\ResourceModel\HiberusExams\CollectionFactory as HiberusExamsCollectionFactory;
 use Magento\Framework\Api\SearchCriteriaInterface;
@@ -70,14 +71,14 @@ class HiberusExamsRepository implements HiberusExamsRepositoryInterface
      * Save Hiberus Exam
      * @param $hiberusExam
      * @return bool
-     * @throws CouldNotSaveException
+     * @throws StudentExamCouldNotAddedException
      */
     public function save($hiberusExam) : bool
     {
         try {
             $this->_resource->save($hiberusExam);
         } catch (\Exception $exception) {
-            throw new CouldNotSaveException(__($exception->getMessage()));
+            throw new StudentExamCouldNotAddedException(__('Student Exam could not be added to database.'));
         }
         return true;
     }

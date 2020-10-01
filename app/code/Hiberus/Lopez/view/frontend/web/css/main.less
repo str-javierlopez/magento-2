@@ -1,0 +1,110 @@
+@letterColor: white;
+@fontFamily: 'sans-serif';
+@margin-left-primary: 20px;
+@mobileColorTitle: blue;
+@colorTitle: cornflowerblue;
+@colorExamPass: green;
+@colorExamNotPass: red;
+@colorBestMark: green;
+@colorFeaturedMark: blue;
+
+@media screen and (max-width: 768px) {
+    .students-list-content {
+        .title {
+            color: @mobileColorTitle;
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .students-list-content {
+        .title {
+            color: @colorTitle;
+        }
+    }
+}
+
+.column.main {
+    text-align: center;
+    display: inline-block;
+}
+
+a.students-link {
+    color: @letterColor;
+    text-decoration: none;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.students-list-content {
+    font-family: @fontFamily;
+    margin: 0 auto;
+    max-width: 600px;
+    border: 3px solid green;
+    border-radius: 20px;
+    padding: 10px 20px;
+    .pass {
+        color: @colorExamPass;
+    }
+    .not-pass {
+        color: @colorExamNotPass;
+    }
+    .featuredMark {
+        color: @colorFeaturedMark !important;
+    }
+    div.actions {
+        display: flex;
+        justify-content: space-around;
+    }
+    .title {
+        text-align: center;
+        margin: 0;
+    }
+    .highest-mark {
+        color: @colorBestMark;
+        font-size: 18px;
+    }
+    .student-highest-mark-info {
+        padding: 20px 0;
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.hide-section {
+                display: flex;
+                align-items: center;
+                .fas.fa-times {
+                    color: red;
+                }
+            }
+        }
+    }
+    .list-style {
+        list-style: none;
+        li {
+            text-align: left;
+            &:nth-child(odd) {
+                margin-left: @margin-left-primary;
+            }
+        }
+    }
+    .table-style {
+        text-align: left;
+        thead {
+            border-bottom: 1px solid green;
+        }
+        tfoot {
+            border-top: 1px solid green;
+        }
+        .col-mark {
+            border-left: 1px solid green;
+        }
+    }
+    .pag {
+        display: flex;
+        justify-content: center;
+        padding: 15px 0;
+    }
+}

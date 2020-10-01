@@ -27,5 +27,5 @@ interface GetApiStudentsExamsInterface
      * Create a new student exam
      * @return Json
      */
-    public function addStudentExam() : string;
+    public function addStudentExam();
 }

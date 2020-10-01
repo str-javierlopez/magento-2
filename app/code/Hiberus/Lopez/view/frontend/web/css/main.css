@@ -1,0 +1,92 @@
+@media screen and (max-width: 768px) {
+  .students-list-content .title {
+    color: blue;
+  }
+}
+@media screen and (min-width: 768px) {
+  .students-list-content .title {
+    color: cornflowerblue;
+  }
+}
+.column.main {
+  text-align: center;
+  display: inline-block;
+}
+a.students-link {
+  color: white;
+  text-decoration: none;
+}
+.hidden {
+  display: none !important;
+}
+.students-list-content {
+  font-family: 'sans-serif';
+  margin: 0 auto;
+  max-width: 600px;
+  border: 3px solid green;
+  border-radius: 20px;
+  padding: 10px 20px;
+}
+.students-list-content .pass {
+  color: green;
+}
+.students-list-content .not-pass {
+  color: red;
+}
+.students-list-content .featuredMark {
+  color: blue !important;
+}
+.students-list-content div.actions {
+  display: flex;
+  justify-content: space-around;
+}
+.students-list-content .title {
+  text-align: center;
+  margin: 0;
+}
+.students-list-content .highest-mark {
+  color: green;
+  font-size: 18px;
+}
+.students-list-content .student-highest-mark-info {
+  padding: 20px 0;
+}
+.students-list-content .student-highest-mark-info .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.students-list-content .student-highest-mark-info .header.hide-section {
+  display: flex;
+  align-items: center;
+}
+.students-list-content .student-highest-mark-info .header.hide-section .fas.fa-times {
+  color: red;
+}
+.students-list-content .list-style {
+  list-style: none;
+}
+.students-list-content .list-style li {
+  text-align: left;
+}
+.students-list-content .list-style li:nth-child(odd) {
+  margin-left: 20px;
+}
+.students-list-content .table-style {
+  text-align: left;
+}
+.students-list-content .table-style thead {
+  border-bottom: 1px solid green;
+}
+.students-list-content .table-style tfoot {
+  border-top: 1px solid green;
+}
+.students-list-content .table-style .col-mark {
+  border-left: 1px solid green;
+}
+.students-list-content .pag {
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+}
+/*# sourceMappingURL=main.css.map */
