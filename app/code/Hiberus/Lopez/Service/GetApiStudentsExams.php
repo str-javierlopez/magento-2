@@ -3,13 +3,12 @@
 namespace Hiberus\Lopez\Service;
 
 use Hiberus\Lopez\Api\GetApiStudentsExamsInterface;
-use Magento\Framework\Controller\Result\Json;
+use Hiberus\Lopez\Helper\Api as HelperApi;
 use Magento\Framework\App\Request\Http;
+use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Integration\Model\Oauth\Consumer;
-use Hiberus\Lopez\Helper\Api as HelperApi;
 
 /**
  * Class GetApiStudentsExams
@@ -51,15 +50,14 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
 
     /**
      * List of Student exam Api action
+     * @api
      * @return Json
      * @throws LocalizedException
      */
     public function getExamsList(): string
     {
         $response = ['status' => false];
-        if (!$this->_helperApi->validateRequest()) {
-            return json_encode($response);
-        }
+        $this->_helperApi->validateRequest();
 
         $studentsExams = $this->_helperApi->getStudentsExamsList();
 
@@ -70,6 +68,7 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
 
     /**
      * Remove Student exam Api action
+     * @api
      * @return Json
      * @throws LocalizedException
      * @throws NoSuchEntityException
@@ -77,13 +76,8 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
     public function removeExamById() : string
     {
         $response = ['status' => false];
-        if (!$this->_helperApi->validateRequest()) {
-            return json_encode($response);
-        }
-        if (!$this->_helperApi->canRemoveExam()) {
-            $response->setData(['status' => false, 'error' => __('Parameters missing')]);
-            return json_encode($response);
-        }
+        $this->_helperApi->validateRequest();
+        $this->_helperApi->canRemoveExam();
 
         $idExam           = $this->_helperApi->_requestParams['id_exam'];
         $isDeleted        = $this->_helperApi->removeStudentExamById($idExam);
@@ -97,18 +91,14 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
 
     /**
      * Add Student exam Api action
+     * @api
      * @return string
      */
-    public function addStudentExam(): string
+    public function addStudentExam()
     {
         $response = ['status' => false];
-        if (!$this->_helperApi->validateRequest()) {
-            return json_encode($response);
-        }
-        if (!$this->_helperApi->canCreateExam()) {
-            $response['message'] = __('Missing parameters.');
-            return json_encode($response);
-        }
+        $this->_helperApi->validateRequest();
+        $this->_helperApi->canCreateExam();
 
         $saved = $this->_helperApi->createStudentExam();
 
@@ -116,5 +106,4 @@ class GetApiStudentsExams implements GetApiStudentsExamsInterface
 
         return json_encode($response);
     }
-
 }

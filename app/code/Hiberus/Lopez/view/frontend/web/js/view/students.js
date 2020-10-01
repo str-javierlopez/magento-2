@@ -27,6 +27,8 @@ define([
         studentWithHighestMark: ko.observable(),
         highestMarkSection: ko.observable(false),
         averageMarkStudents: ko.observable(),
+        highestExamId: ko.observable(false),
+        highestMarks: ko.observableArray(),
 
         /**
          *
@@ -40,6 +42,23 @@ define([
             this.buttonActionText(this.buttonActionTextWhenVisible);
             this.Pager();
             return this;
+        },
+        getMostHighestMarks: function () {
+            const studentsExamsSortered = underscore.sortBy(this.getStudentsList(), 'mark', '>');
+            const size = underscore.size(studentsExamsSortered);
+            const highestMarks = studentsExamsSortered.slice(size - 3, size);
+            this.highestMarks(highestMarks);
+            this.selectHighestMark();
+        },
+        selectHighestMark: function () {
+            const self = this;
+            underscore.map(this.highestMarks(), function (exam, index) {
+                const element = jQuery('.exam_' + exam.id_exam + ' .highest-mark');
+                element.removeClass('hidden');
+                if (exam.id_exam !== self.highestExamId) {
+                    element.addClass('featuredMark');
+                }
+            });
         },
         getStudentsList: function () {
             return this.exams;
@@ -74,9 +93,14 @@ define([
 
             jQuery('.highest-mark').addClass('hidden');
             jQuery('.exam_' + exam.id_exam + ' .highest-mark').removeClass('hidden');
+            this.highestExamId(exam.id_exam);
             this.highestMarkSection(true);
         },
+        isExamPass: function (mark) {
+            return parseFloat(mark) >= 5;
+        },
         hideHighestMarkSection: function () {
+            jQuery('.highest-mark').addClass('hidden');
             this.highestMarkSection(false);
         },
         getAverageStudents: function () {
@@ -90,17 +114,20 @@ define([
             const average = (sumMarks / size).toFixed(2);
             this.averageMarkStudents(average);
         },
+        getRange: function (start,  end) {
+            let range = [];
+            for (let i = start; i <= end; i++) {
+                range.push(i);
+            }
+            return range;
+        },
         getTotalPages: function () {
 
-            const total_pages = Math.ceil(underscore.size(this.getStudentsList()) / this.DataPerPage()) + 1;
+            const total_pages = Math.ceil(underscore.size(this.getStudentsList()) / this.DataPerPage());
 
             this.totalOptions(Math.ceil(total_pages / 3));
 
-            this.allPages(underscore.range(total_pages));
-
-            const firstKey = underscore.first(this.allPages());
-
-            this.allPages(this.allPages().slice(firstKey + 1, total_pages));
+            this.allPages(this.getRange(1, total_pages));
 
             let array_pages_show = [];
 
@@ -120,7 +147,7 @@ define([
             if (this.currentOption() <= this.totalOptions()) {
                 const last_value = underscore.last(this.totalPages());
                 this.currentOption(this.currentOption() + 1);
-                return this.allPages().slice(last_value, last_value + 3);
+                return this.allPages().slice(last_value, last_value + 4);
             }
             return this.totalPages();
         },
@@ -159,6 +186,8 @@ define([
 
             self.getExamsPaginated = function (page) {
                 self.CurrentPage(page);
+                jQuery('.exam_' + self.highestExamId() + ' .highest-mark').removeClass('hidden');
+                self.selectHighestMark();
             };
         },
         getIsPageShowing: function (pageToCheck) {
@@ -176,7 +205,7 @@ define([
             const examKey       = underscore.findIndex(studentsExams, function (item) {
                 return item.id_exam === idExam;
             });
-            return Math.ceil(examKey / this.DataPerPage()) + 1;
+            return Math.ceil(examKey / this.DataPerPage());
         },
         customFade: function() {
             ko.bindingHandlers.fadeVisible = {
