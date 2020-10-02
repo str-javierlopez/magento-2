@@ -7,6 +7,8 @@
 @colorExamNotPass: red;
 @colorBestMark: green;
 @colorFeaturedMark: blue;
+@colorPagActive: white;
+@colorBackgroundPagActive: green;
 
 @media screen and (max-width: 768px) {
     .students-list-content {
@@ -56,6 +58,8 @@ a.students-link {
     }
     div.actions {
         display: flex;
+        display: -webkit-flex;
+        display: -ms-flex;
         justify-content: space-around;
     }
     .title {
@@ -69,11 +73,16 @@ a.students-link {
     .student-highest-mark-info {
         padding: 20px 0;
         .header {
+            display: -webkit-flex;
+            display: -ms-flex;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px 0;
             &.hide-section {
                 display: flex;
+                display: -webkit-flex;
+                display: -ms-flex;
                 align-items: center;
                 .fas.fa-times {
                     color: red;
@@ -104,7 +113,32 @@ a.students-link {
     }
     .pag {
         display: flex;
+        display: -webkit-flex;
+        display: -ms-flex;
         justify-content: center;
         padding: 15px 0;
+        .exams-pagination {
+            padding: 0 10px;
+            .pagination._active {
+                color: @colorPagActive;
+                border: 1px solid @colorBackgroundPagActive;
+                border-radius: 2px;
+                background: @colorBackgroundPagActive;
+            }
+        }
+        .pagination-next {
+            font-size: 16px;
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
+        .pagination-previous {
+            font-size: 16px;
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
     }
 }

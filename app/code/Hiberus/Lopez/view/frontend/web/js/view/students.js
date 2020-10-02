@@ -44,7 +44,7 @@ define([
             return this;
         },
         getMostHighestMarks: function () {
-            const studentsExamsSortered = underscore.sortBy(this.getStudentsList(), 'mark', '>');
+            const studentsExamsSortered = underscore.sortBy(this.getStudentsList(), 'mark');
             const size = underscore.size(studentsExamsSortered);
             const highestMarks = studentsExamsSortered.slice(size - 3, size);
             this.highestMarks(highestMarks);
@@ -55,7 +55,7 @@ define([
             underscore.map(this.highestMarks(), function (exam, index) {
                 const element = jQuery('.exam_' + exam.id_exam + ' .highest-mark');
                 element.removeClass('hidden');
-                if (exam.id_exam !== self.highestExamId) {
+                if (exam.id_exam !== self.highestExamId()) {
                     element.addClass('featuredMark');
                 }
             });
@@ -92,7 +92,9 @@ define([
             this.studentWithHighestMark(completeMessage);
 
             jQuery('.highest-mark').addClass('hidden');
-            jQuery('.exam_' + exam.id_exam + ' .highest-mark').removeClass('hidden');
+            const element = jQuery('.exam_' + exam.id_exam + ' .highest-mark');
+            element.removeClass('hidden');
+            element.removeClass('featuredMark');
             this.highestExamId(exam.id_exam);
             this.highestMarkSection(true);
         },
