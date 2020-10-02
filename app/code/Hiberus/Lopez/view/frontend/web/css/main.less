@@ -108,11 +108,16 @@ a.students-link {
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            &.hide-section {
+            .hide-section {
                 display: flex;
                 display: -webkit-flex;
                 display: -ms-flex;
                 align-items: center;
+                margin-left: 15px;
+                cursor: pointer;
+                &:hover {
+                    color: @colorBackgroundPagActive;
+                }
                 .fas.fa-times {
                     color: red;
                 }
