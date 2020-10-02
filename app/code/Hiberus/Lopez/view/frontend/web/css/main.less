@@ -36,6 +36,10 @@ a.students-link {
     text-decoration: none;
 }
 
+.text-center {
+    text-align: center;
+}
+
 .hidden {
     display: none !important;
 }
@@ -55,12 +59,37 @@ a.students-link {
     }
     .featuredMark {
         color: @colorFeaturedMark !important;
+        font-size: 18px !important;
     }
     div.actions {
         display: flex;
         display: -webkit-flex;
         display: -ms-flex;
         justify-content: space-around;
+        .icon-table {
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
+        .icon-list {
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
+        .hide-marks-action {
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
+        .icon-highest-note {
+            cursor: pointer;
+            &:hover {
+                color: @colorBackgroundPagActive;
+            }
+        }
     }
     .title {
         text-align: center;
@@ -68,7 +97,7 @@ a.students-link {
     }
     .highest-mark {
         color: @colorBestMark;
-        font-size: 18px;
+        font-size: 20px;
     }
     .student-highest-mark-info {
         padding: 20px 0;
@@ -79,11 +108,16 @@ a.students-link {
             justify-content: center;
             align-items: center;
             padding: 20px 0;
-            &.hide-section {
+            .hide-section {
                 display: flex;
                 display: -webkit-flex;
                 display: -ms-flex;
                 align-items: center;
+                margin-left: 15px;
+                cursor: pointer;
+                &:hover {
+                    color: @colorBackgroundPagActive;
+                }
                 .fas.fa-times {
                     color: red;
                 }
