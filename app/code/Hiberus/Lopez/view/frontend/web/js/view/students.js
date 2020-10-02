@@ -12,8 +12,11 @@ define([
         },
         marksVisible: ko.observable(true),
         buttonActionText: ko.observable(),
+        iconButtonActionText: ko.observable(),
         buttonActionTextWhenVisible: $t('Hide Marks'),
+        iconWhenButtonActionIsVisible: 'fas fa-eye',
         buttonActionTextWhenNotVisible: $t('Show Marks'),
+        iconWhenButtonActionIsNotVisible: 'fas fa-eye-slash',
         listStyle: ko.observable(true),
         tableStyle: ko.observable(false),
         CurrentPage: ko.observable(1),
@@ -40,6 +43,7 @@ define([
             this.examsList(this.getStudentsList());
             this.getAverageStudents();
             this.buttonActionText(this.buttonActionTextWhenVisible);
+            this.iconButtonActionText(this.iconWhenButtonActionIsNotVisible);
             this.Pager();
             return this;
         },
@@ -67,8 +71,10 @@ define([
             this.marksVisible(!this.marksVisible());
             if (this.marksVisible()) {
                 this.buttonActionText(this.buttonActionTextWhenVisible);
+                this.iconButtonActionText(this.iconWhenButtonActionIsNotVisible);
             } else {
                 this.buttonActionText(this.buttonActionTextWhenNotVisible);
+                this.iconButtonActionText(this.iconWhenButtonActionIsVisible);
             }
         },
         changeToListStyle: function () {

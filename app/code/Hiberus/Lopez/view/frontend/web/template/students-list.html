@@ -16,7 +16,7 @@
         <td class="col"><span class="firstname" data-bind="text: firstname"></span></td>
         <td class="col"><span class="lastname" data-bind="text: lastname"></span></td>
         <td class="col col-mark" data-bind="fadeVisible: $parent.marksVisible"><span class="mark" data-bind="text: mark"></span></td>
-        <td class="col"><i class="highest-mark fas fa-medal hidden"></i></td>
+        <td class="col text-center"><i class="highest-mark fas fa-medal hidden"></i></td>
     </tr>
     </tbody>
     <tfoot>
@@ -49,7 +49,10 @@
 </div>
 
 <div class="actions">
-    <span data-bind="text: buttonActionText, click: showOrHideStudentsMark"></span>
+    <span class="hide-marks-action" data-bind="click: showOrHideStudentsMark">
+        <i data-bind="attr: { class: iconButtonActionText() }" class="fas fa-eye-slash"></i>
+        <span data-bind="text: buttonActionText"></span>
+    </span>
     <span class="icon-table" data-bind="fadeVisible: listStyle, click: changeToTableStyle">
         <i class="fas fa-table"></i>
         <span data-bind="i18n: 'Table Style'"></span>

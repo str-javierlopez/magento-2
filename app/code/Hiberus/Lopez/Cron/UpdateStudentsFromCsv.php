@@ -79,6 +79,5 @@ class UpdateStudentsFromCsv
         foreach ($hiberusExams as $hiberusExam) {
             $this->_hiberusExamsRepository->save($hiberusExam);
         }
-        //echo 'Students Updated!';
     }
 }
