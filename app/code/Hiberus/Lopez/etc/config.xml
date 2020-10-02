@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <hiberus_modules_enabled_modules_section>
+            <hiberus_enabled_modules_group>
+                <hiberus_module_lopez_enabled>1</hiberus_module_lopez_enabled>
+            </hiberus_enabled_modules_group>
+        </hiberus_modules_enabled_modules_section>
+        <hiberus_modules_general_config_section>
+            <hiberus_enabled_modules_group>
+                <hiberus_module_lopez_marks_min>0</hiberus_module_lopez_marks_min>
+                <hiberus_module_lopez_marks_max>10</hiberus_module_lopez_marks_max>
+                <hiberus_module_lopez_marks_decimals>2</hiberus_module_lopez_marks_decimals>
+                <hiberus_module_lopez_plugin_enabled>1</hiberus_module_lopez_plugin_enabled>
+                <hiberus_module_lopez_plugin_mark>4.9</hiberus_module_lopez_plugin_mark>
+            </hiberus_enabled_modules_group>
+        </hiberus_modules_general_config_section>
+        <hiberus_modules_cron>
+            <hiberus_enabled_cron_general>
+                <hiberus_module_lopez_cron_enabled>1</hiberus_module_lopez_cron_enabled>
+            </hiberus_enabled_cron_general>
+            <hiberus_module_lopez_cron_update_studients>
+                <hiberus_module_lopez_cron_update_studients_enabled>1</hiberus_module_lopez_cron_update_studients_enabled>
+                <hiberus_module_lopez_cron_update_studients_csv_is_absolute_path>0</hiberus_module_lopez_cron_update_studients_csv_is_absolute_path>
+                <hiberus_module_lopez_cron_update_studients_csv_path>CSV/Students.csv</hiberus_module_lopez_cron_update_studients_csv_path>
+            </hiberus_module_lopez_cron_update_studients>
+        </hiberus_modules_cron>
+    </default>
+</config>

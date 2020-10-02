@@ -15,7 +15,7 @@
              parent="Hiberus_Lopez::menu"
         />
         <add id="Hiberus_Lopez::configuration_general"
-             title="Configuración general"
+             title="General Configuration"
              module="Hiberus_Lopez"
              sortOrder="10"
              action="adminhtml/system_config/edit/section/hiberus_modules_general_config_section"
@@ -23,7 +23,7 @@
              parent="Hiberus_Lopez::menu"
         />
         <add id="Hiberus_Lopez::manage_students_exams"
-             title="Gestionar Exámenes de Alumnos"
+             title="Manage Students Exams"
              module="Hiberus_Lopez"
              sortOrder="12"
              action="students_grid/index/index"
@@ -31,7 +31,7 @@
              parent="Hiberus_Lopez::menu"
         />
         <add id="Hiberus_Lopez::import_students"
-             title="Importar Notas de Alumnos"
+             title="Import Students Notes"
              module="Hiberus_Lopez"
              sortOrder="12"
              action="adminhtml/system_config/edit/section/hiberus_modules_import_students"
