@@ -3,12 +3,12 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <tab id="hiberus_modules" translate="label" sortOrder="80">
-            <label>Módulos Hiberus</label>
+            <label>Hiberus Modules</label>
         </tab>
 
         <section id="hiberus_modules_enabled_modules_section" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1">
             <class>separator-top</class>
-            <label>Habilitar / Deshabilitar Módulos</label>
+            <label>Enable / Disable Modules</label>
             <tab>hiberus_modules</tab>
             <resource>Hiberus_Lopez::configurateModule</resource>
             <group id="hiberus_enabled_modules_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
@@ -21,41 +21,41 @@
 
         <section id="hiberus_modules_general_config_section" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1">
             <class>separator-top</class>
-            <label>Configuración general</label>
+            <label>General Configuration</label>
             <tab>hiberus_modules</tab>
             <resource>Hiberus_Lopez::configuration_general</resource>
             <group id="hiberus_enabled_modules_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
-                <label>Notas</label>
+                <label>Notes</label>
                 <field id="hiberus_module_lopez_marks_min" translate="label" type="text" showInDefault="1" showInWebsite="1">
-                    <label>Mínima nota</label>
-                    <comment>Nota mínima del alumno. Por defecto 0.</comment>
+                    <label>Minimum grade</label>
+                    <comment>Minimum student grade. By default 0.</comment>
                 </field>
                 <field id="hiberus_module_lopez_marks_max" translate="label" type="text" showInDefault="1" showInWebsite="1">
-                    <label>Máxima nota</label>
-                    <comment>Nota máxima del alumno. Por defecto 10.</comment>
+                    <label>highest mark</label>
+                    <comment>Maximum mark of the student. By default 10.</comment>
                 </field>
                 <field id="hiberus_module_lopez_marks_decimals" translate="label" type="text" showInDefault="1" showInWebsite="1">
-                    <label>Decimales</label>
-                    <comment>Precisión para la nota del alumno. Por defecto 2.</comment>
+                    <label>Decimals</label>
+                    <comment>Accuracy for the student's grade. By default 2.</comment>
                 </field>
                 <field id="hiberus_module_lopez_plugin_enabled" translate="label" type="select" showInDefault="1" showInWebsite="1">
-                    <label>Poner otra nota a los alumnos suspensos</label>
+                    <label>Give another grade to failed students</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment>Los alumnos que estén suspensos aparecerán con una nota diferente a la real.</comment>
+                    <comment>Students who are failed will appear with a different grade than the real one.</comment>
                 </field>
                 <field id="hiberus_module_lopez_plugin_mark" translate="label" type="text" showInDefault="1" showInWebsite="1">
                     <depends>
                         <field id="hiberus_modules_general_config_section/hiberus_enabled_modules_group/hiberus_module_lopez_plugin_enabled">1</field>
                     </depends>
-                    <label>Nota para los alumnos suspensos</label>
-                    <comment>Por defecto '4.9'.</comment>
+                    <label>Note to failed students</label>
+                    <comment>By default '4.9'.</comment>
                 </field>
             </group>
         </section>
 
         <section id="hiberus_modules_cron" translate="label" sortOrder="3" showInDefault="1" showInWebsite="1">
             <class>separator-top</class>
-            <label>Configurar Cron</label>
+            <label>Configurate Cron</label>
             <tab>hiberus_modules</tab>
             <resource>Hiberus_Lopez::cron</resource>
             <group id="hiberus_enabled_cron_general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
@@ -66,34 +66,34 @@
                 </field>
             </group>
             <group id="hiberus_module_lopez_cron_update_studients" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
-                <label>Actualización de estudiantes mediante CSV</label>
+                <label>Student update via CSV</label>
                 <depends>
                     <field id="hiberus_modules_cron/hiberus_enabled_cron_general/hiberus_module_lopez_cron_enabled">1</field>
                 </depends>
                 <field id="hiberus_module_lopez_cron_update_studients_enabled" translate="label" type="select" showInDefault="1" showInWebsite="1">
-                    <label>Activar/Desactivar</label>
+                    <label>Enable / Disable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="hiberus_module_lopez_cron_update_studients_csv_is_absolute_path" translate="label" type="select" showInDefault="1" showInWebsite="1">
-                    <label>Es Ruta absoluta</label>
+                    <label>It is absolute route</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="hiberus_module_lopez_cron_update_studients_csv_path" translate="label" type="text" showInDefault="1" showInWebsite="1">
-                    <label>Ruta del CSV</label>
-                    <comment>Si es absoluta, deberá de estar habilitada la opción 'Es ruta absoluta'. Si no, buscará en la carpeta media.
-                    Ejemplo: 'CSV/Students.csv'.</comment>
+                    <label>CSV path</label>
+                    <comment>If it is absolute, the option 'Is absolute path' must be enabled. If not, it will search the media folder.
+                        Example: 'CSV / Students.csv'.</comment>
                 </field>
             </group>
         </section>
 
         <section id="hiberus_modules_import_students" translate="label" sortOrder="3" showInDefault="1" showInWebsite="1">
             <class>separator-top</class>
-            <label>Importar Notas de Alumnos</label>
+            <label>Import Student Notes</label>
             <tab>hiberus_modules</tab>
             <resource>Hiberus_Lopez::cron</resource>
             <group id="hiberus_enabled_import" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1">
                 <field id="hiberus_module_lopez_import_file" translate="label" type="file" showInDefault="1" showInWebsite="1">
-                    <label>CSV a importar</label>
+                    <label>CSV to import</label>
                     <backend_model>Hiberus\Lopez\Model\Config\Backend\CsvFile</backend_model>
                     <base_url type="media">hiberusCSV/</base_url>
                 </field>

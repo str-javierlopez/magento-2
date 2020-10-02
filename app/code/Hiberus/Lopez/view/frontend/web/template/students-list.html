@@ -1,29 +1,29 @@
 
-<ul data-bind="fadeVisible: listStyle">
+<ul class="list-style" data-bind="fadeVisible: listStyle">
     <!-- ko foreach: examsList -->
-    <li data-bind="attr: { class: 'exam_' + id_exam }"><span class="firstname" data-bind="text: firstname"></span> <span class="lastname" data-bind="text: lastname"></span> <span class="mark" data-bind="fadeVisible: $parent.marksVisible, text: mark"></span> <i class="highest-mark fas fa-medal hidden"></i></li>
+    <li class="student-list-style" data-bind="attr: { class: 'exam_' + id_exam } , css:{ 'pass': $parent.isExamPass(mark), 'not-pass': !$parent.isExamPass(mark) }"><span class="firstname" data-bind="text: firstname"></span> <span class="lastname" data-bind="text: lastname"></span> <span class="mark" data-bind="fadeVisible: $parent.marksVisible, text: mark"></span> <i class="highest-mark fas fa-medal hidden"></i></li>
     <!-- /ko -->
     <li class="average-info"><span data-bind="i18n: 'Average Students:'"></span> <span data-bind="text: averageMarkStudents"></span></li>
 </ul>
-<table data-bind="fadeVisible: tableStyle">
+<table class="table-style" data-bind="fadeVisible: tableStyle">
     <thead>
-        <td><span data-bind="i18n: 'Firstname'"></span></td>
-        <td><span data-bind="i18n: 'Lastname'"></span></td>
-        <td data-bind="fadeVisible: marksVisible"><span data-bind="i18n: 'Mark'"></span></td>
+    <td><span data-bind="i18n: 'Firstname'"></span></td>
+    <td><span data-bind="i18n: 'Lastname'"></span></td>
+    <td class="col-mark" data-bind="fadeVisible: marksVisible"><span data-bind="i18n: 'Mark'"></span></td>
     </thead>
     <tbody data-bind="foreach: examsList">
-        <tr data-bind="attr: { class: 'exam_' + id_exam }">
-            <td class="col"><span class="firstname" data-bind="text: firstname"></span></td>
-            <td class="col"><span class="lastname" data-bind="text: lastname"></span></td>
-            <td class="col" data-bind="fadeVisible: $parent.marksVisible"><span class="mark" data-bind="text: mark"></span></td>
-            <td class="col"><i class="highest-mark fas fa-medal hidden"></i></td>
-        </tr>
+    <tr data-bind="attr: { class: 'exam_' + id_exam } , css:{ 'pass': $parent.isExamPass(mark), 'not-pass': !$parent.isExamPass(mark) }">
+        <td class="col"><span class="firstname" data-bind="text: firstname"></span></td>
+        <td class="col"><span class="lastname" data-bind="text: lastname"></span></td>
+        <td class="col col-mark" data-bind="fadeVisible: $parent.marksVisible"><span class="mark" data-bind="text: mark"></span></td>
+        <td class="col"><i class="highest-mark fas fa-medal hidden"></i></td>
+    </tr>
     </tbody>
     <tfoot>
-        <tr>
-            <td><span data-bind="i18n: 'Average Students:'"></span></td>
-            <td><span data-bind="text: averageMarkStudents"></span></td>
-        </tr>
+    <tr>
+        <td><span data-bind="i18n: 'Average Students:'"></span></td>
+        <td><span data-bind="text: averageMarkStudents"></span></td>
+    </tr>
     </tfoot>
 </table>
 
@@ -64,10 +64,10 @@
     </span>
 </div>
 
-<div class="student-highest-mark-info" data-bind="fadeVisible: highestMarkSection">
+<div class="student-highest-mark-info" data-bind="fadeVisible: highestMarkSection, afterRender: getMostHighestMarks()">
     <div class="header">
         <h3 class="title" data-bind="i18n: 'Highest mark'"></h3>
-        <span class="hide-secction" data-bind="click: hideHighestMarkSection"><i class="fas fa-times"></i></span>
+        <span class="hide-section" data-bind="click: hideHighestMarkSection"><i class="fas fa-times"></i></span>
     </div>
     <span class="subtitle" data-bind="text: studentWithHighestMark"></span>
 </div>

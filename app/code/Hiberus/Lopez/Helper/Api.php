@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Hiberus\Lopez\Helper;
 
 use Hiberus\Lopez\Api\Data\HiberusExamsInterface;
@@ -14,6 +13,9 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Setup\Exception;
 use Hiberus\Lopez\Helper\Csv as HelperCsv;
+use Hiberus\Lopez\Exception\StudentExamCouldNotAddedException;
+use PHPStan\DependencyInjection\ParameterNotFoundException;
+use Hiberus\Lopez\Exception\StudentExamCouldNotDeletedException;
 
 /**
  * Class Api
@@ -73,35 +75,34 @@ class Api extends AbstractHelper
 
     /**
      * Validate if is posible remove an exam
-     * @return bool
      */
     public function canRemoveExam()
     {
-        return isset($this->_requestParams['id_exam']);
+        if (!isset($this->_requestParams['id_exam'])) {
+            throw new ParameterNotFoundException(__('Missing parameters.'));
+        }
     }
 
     /**
      * Validate if is posible create an exam
-     * @return bool
      */
     public function canCreateExam()
     {
-        return isset($this->_requestParams['firstname']) && isset($this->_requestParams['lastname']);
+        if (!isset($this->_requestParams['firstname']) || !isset($this->_requestParams['lastname'])) {
+            throw new ParameterNotFoundException(__('Missing parameters.'));
+        }
     }
 
     /**
      * Validate the request
-     * @return bool
      */
     public function validateRequest()
     {
         if (!$this->_request->isPost() && !$this->_request->isGet() && !$this->_request->isDelete()) {
-            return false;
+            throw new \HttpRequestMethodException(__('The request method is not valid.'));
         }
 
         $this->_requestParams = $this->_request->getParams();
-
-        return true;
     }
 
     /**
@@ -121,15 +122,14 @@ class Api extends AbstractHelper
      * @param $idExam
      * @return bool
      * @throws LocalizedException
-     * @throws NoSuchEntityException
+     * @throws StudentExamCouldNotDeletedException
      */
     public function removeStudentExamById($idExam) : bool
     {
         try {
             $this->_hiberusExamsRepository->deleteByIdExam($idExam);
-        } catch (Exception $exception) {
-            $this->_exceptionsMessages = $exception->getMessage();
-            return false;
+        } catch (StudentExamCouldNotDeletedException $exception) {
+            throw new StudentExamCouldNotDeletedException(__('The student exam could not be deleted.'));
         }
         return true;
     }
@@ -150,17 +150,17 @@ class Api extends AbstractHelper
     /**
      * Save an student exam
      * @param HiberusExamsInterface $hiberusExams
-     * @return bool
+     * @return bool | Exception
      * @throws LocalizedException
-     * @throws NoSuchEntityException
+     * @throws LocalizedException
+     * @throws Exception
      */
-    private function saveHiberusStudentExam(HiberusExamsInterface $hiberusExams) : bool
+    private function saveHiberusStudentExam(HiberusExamsInterface $hiberusExams)
     {
         try {
             $this->_hiberusExamsRepository->save($hiberusExams);
-        } catch (CouldNotSaveException $exception) {
-            $this->_exceptionsMessages = $exception->getMessage();
-            return false;
+        } catch (Exception $exception) {
+            throw new Exception(__('The Student Exam could not be delete.'));
         }
         return true;
     }
